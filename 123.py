@@ -43,7 +43,6 @@
 # print(life['animals'].keys())
 # print(life['animals']['cats'])
 
-
 # PY CRUST
 
 # # Ex.1,2 - if, else, elif
@@ -125,7 +124,8 @@
 # plots = ['A nun turns into a monster', 'A haunted yarn shop']
 # print(dict(zip(titles, plots)))
 
-#  Objects and Classes
+#  OBJECTS AND CLASSES
+
 # # Ex.1
 # class Thing:
 #     pass
@@ -233,3 +233,100 @@
 #
 # R = Robot()
 # print(R.does())
+
+# # MANAGE WITH DATA
+
+# # Ex.1 - unicode
+# import unicodedata
+# mystery = '\U0001f4a9'
+# print(mystery)
+# print(unicodedata.name(mystery))
+
+# # Ex.2 - UTF-8
+# pop_bytes = mystery.encode('utf-8')
+# print(pop_bytes)
+
+# # Ex.3 - decode
+# pop_string = pop_bytes.decode('utf-8')
+# print(pop_string)
+
+# # Ex.4 - old style
+# # R = 'roast beef', H = 'ham', H1 = 'head', C = 'clam' print('''My kitty cat likes %s, My kitty cat likes %s, My kitty cat fell on his %s, And now thinks he's a %s''' % (R, H, H1, C))
+# poem = '''My kitty cat likes %s,
+# My kitty cat likes %s,
+# My kitty cat fell on his %s,
+# And now thinks he's a %s'''
+# args = ('roast beef', 'ham', 'head', 'clam')
+# print(poem % args)
+
+# # Ex. 5,6 - new style
+# letter = ('''Dear {salutation} {name},
+# Thank you for your letter. We are sorry that our {product} {verbed} in your {room}.
+# Please note that it should never be used in a {room}, especially near any {animals}.
+# Send us your receipt and {amount} for shipping and handling. We will send you
+# another {product} that, in our tests, is {percent}% less likely to have {verbed}.
+# Thank you for your support.
+# Sincerely,
+# {spokeman}
+# {job_title}
+# ''')
+# response = {
+#     "salutation": 'fff',
+#     'name': 'ggg',
+#     'product': 'ddd',
+#     'verbed': 'rrr',
+#     'room': 'qqq',
+#     'animals': 'eee',
+#     'amount': '444',
+#     'percent': '3',
+#     'spokeman': 'ttt',
+#     'job_title': 'yyy'
+# }
+# print(letter.format(**response))
+
+# # Ex.7-11 - regular expressions
+# import re
+# mammoth = '''We have seen the Queen of cheese,
+# Laying quietly at your ease,
+# Gently fanned by evening breeze --
+# Thy fair form no flies dare seize.
+# All gaily dressed soon you'll go
+# To the great Provincial Show,
+# To be admired by many a beau
+# In the city of Toronto.
+# Cows numerous as a swarm of bees --
+# Or as the leaves upon the trees --
+# It did require to make thee please,
+# And stand unrivalled Queen of cheese.
+# May you not receive a scar as
+# We have heard that Mr. Harris
+# Intends to send you off as far as
+# The great World's show at Paris.
+# Of the youth -- beware of these --
+# For some of them might rudely squeeze
+# And bite your cheek; then songs or glees
+# We could not sing o' Queen of cheese.
+# We'rt thou suspended from baloon,
+# You'd cast a shade, even at noon;
+# Folks would think it was the moon
+# About to fall and crush them soon.'''
+# # find all words start from c
+# print(re.findall(r'\bc\w*', mammoth))
+# # find all 4-letters words start from c
+# print(re.findall(r'\bc...\b', mammoth))
+# print(re.findall(r'\bc\w{3}\b', mammoth))
+# # print all words ens with r
+# print(re.findall(r'\b\w*r\b', mammoth))
+# # all words with three vowels one by one
+# print(re.findall(r'\b\w*[aeiou]{3}[^aeiou\s]*\w*\b', mammoth))
+
+#  Ex.12
+import binascii
+hex_str = '47494638396101000100800000000000ffffff21f9' + '0401000000002c000000000100010000020144003b'
+gif = binascii.unhexlify(hex_str)
+print(len(gif))
+print(gif[:6] == b'GIF89a')
+import struct
+width, height = struct.unpack('<HH', gif[6:10])
+print(width, height)
+
