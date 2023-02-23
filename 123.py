@@ -320,13 +320,92 @@
 # # all words with three vowels one by one
 # print(re.findall(r'\b\w*[aeiou]{3}[^aeiou\s]*\w*\b', mammoth))
 
-#  Ex.12
-import binascii
-hex_str = '47494638396101000100800000000000ffffff21f9' + '0401000000002c000000000100010000020144003b'
-gif = binascii.unhexlify(hex_str)
-print(len(gif))
-print(gif[:6] == b'GIF89a')
-import struct
-width, height = struct.unpack('<HH', gif[6:10])
-print(width, height)
+# #  Ex.12
+# import binascii
+# hex_str = '47494638396101000100800000000000ffffff21f9' + '0401000000002c000000000100010000020144003b'
+# gif = binascii.unhexlify(hex_str)
+# print(len(gif))
+# print(gif[:6] == b'GIF89a')
+# import struct
+# width, height = struct.unpack('<HH', gif[6:10])
+# print(width, height)
 
+# DATA HAS TO GO SOMEWHERE
+
+# # Ex.1,2 - open, rewrite doc
+# test1 = 'This is a test of emergency text system'
+# file = open('test.txt', 'wt')
+# file.write(test1)
+# print(len(test1))
+# file.close()
+#
+# with open('test.txt', 'rt') as infile:
+#     test2 = infile.read()
+# print(len(test2))
+#
+# print(test1 == test2)
+
+# # Ex.3, 4 - work with csv
+# import csv
+# info = '''author,book
+#     J R R Tolken,The Hobbit
+#     Lynne Truss',"Eats, Shoots & Leaves"
+#     '''
+# with open('books.csv', 'wt') as fin:
+#     fin.write(info)
+#
+# with open('books.csv', 'rt') as fout:
+#     books = csv.DictReader(fout)
+#     for book in books:
+#         print(book)
+
+# # Ex.5-9 - work with SQL
+# import csv
+# import sqlite3
+# text = '''title,author,year
+#     The Weirdstone of Brisingamen,Alan Garner,1960
+#     Perdito Street Station,China Mieville,200
+#     Thud!,Terry Pratchett,2005
+#     The Spellman Files,Lisa Lutz,2007
+#     Small Gods,Terry Pratchett,1992
+#     '''
+# with open('books2.csv', 'wt') as fin:
+#     fin.write(text)
+#
+# db = sqlite3.connect('books.db')
+# curs = db.cursor()
+# curs.execute('''CREATE TABLE book
+#     (title TEXT,
+#     author TEXT,
+#     year INT)''')
+# db.commit()
+#
+# str = 'INSERT INTO book VALUES(?, ?, ?)'
+# with open('books2.csv', 'rt') as inf:
+#     books = csv.DictReader(inf)
+#     for book in books:
+#         curs.execute(str, (book['title'], book['author'], book['year']))
+# db.commit()
+#
+# sql = 'SELECT title FROM book ORDER BY title ASC'
+# for row in db.execute(sql):
+#     print(row)
+# for row in db.execute('SELECT * FROM book ORDER BY year')
+#     print(row)
+#
+# # Ex.10 - work with sqlalchemy
+# import sqlalchemy
+# conn = sqlalchemy.create_engine('sqlite://books.db')
+# sql1 = 'SELECT title FROM book ORDER BY title ASC'
+# rows = conn.execute(sql)
+# for row in rows:
+#     print(row)
+#
+# # Ex.11 - work with redis
+# import redis
+# conn = redis.Redis()
+# conn.delete('test')
+# conn.hmset('test', {'count': 1, 'name': 'Fester Bestertester'})
+# conn.hgetall('test')
+# conn.hincrby('test', 'count', 3)
+# conn.hget('test', 'count')
